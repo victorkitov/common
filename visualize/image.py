@@ -2,6 +2,7 @@ import numpy as np
 from IPython import display
 from pylab import *
 import os
+from common.files import listdir_visible
 from PIL import Image
 
 def dynamic_img_show(img,title_str='',fig_size=[14,8],hide_axes=True):
@@ -36,7 +37,7 @@ def show_images(path, K=3, figsize=(20,20)):
     [figsize] controls size of figure containing all images in one row.'''
     
     figure(figsize=figsize)
-    files = os.listdir(path)
+    files = listdir_visible(path)
     
     for num,file in enumerate(files,start=1):
         img = Image.open(os.path.join(path,file))
