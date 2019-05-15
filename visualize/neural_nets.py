@@ -36,3 +36,10 @@ def show_weights_hist(net,figsize=(16,10),show_zero=True):
 
 
 
+
+def get_pytorch_model_name(model):
+    '''Return name of pytorch model'''
+    if hasattr(model,'module'): # DataParallel model
+        return model.module.__class__.__name__
+    else: # not parallelized model
+        return model.__class__.__name__

@@ -25,7 +25,7 @@ def dynamic_img_show(img,title_str='',fig_size=[14,8],hide_axes=True):
     display.clear_output(wait=True)   
 
 
-def show_image(pil_image, title_str):
+def show_image(pil_image, title_str=''):
     '''show PIL image [pil_image], giving a title if [title_str] is provided'''
     imshow(pil_image); xticks([]); yticks([]); 
     if title_str:
