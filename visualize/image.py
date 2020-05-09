@@ -5,32 +5,39 @@ import os
 from common.files import listdir_visible
 from PIL import Image
 
-def dynamic_img_show(img,title_str='',fig_size=[14,8],hide_axes=True):
-    '''Show image <img>. If called repeatedly within a cycle will dynamically redraw image.
-    #DEMO
-    import time
-
+def dynamic_plot(X,Y, figsize=[10,5], max_x=None, min_y=None, max_y=None):
+    '''plots dependency between X and Y dynamically: after each call current graph is redrawn
+    DEMO:
+    X=[]
+    Y=[]
     for i in range(10):
-        img = np.zeros([50,50])
-        img[:i*5]=1
-        dynamic_img_show(img,'iter=%s'%i)
-        time.sleep(0.1)
+        X.append(i)
+        Y.append(i**.5)
+        plot_dynamic_plot(X,Y,[14,10], max_x=10, max_y=4)  
+        time.sleep(0.3)    
     '''
-    plt.clf()
-    plt.title(title_str)
-    plt.imshow(img)
-    plt.xticks([]); plt.yticks([]);
-    plt.gcf().set_size_inches(fig_size)
-    display.display(plt.gcf())
-    display.clear_output(wait=True)   
+    gcf().set_size_inches(figsize)
+    cla()
+    plot(X,Y)
+    if max_x: 
+        plt.gca().set_xlim(right=max_x)
+    if min_y: 
+        plt.gca().set_ylim(bottom=min_y)
+    if max_y: 
+        plt.gca().set_ylim(top=max_y)
+        
+    display.display(gcf())
+    display.clear_output(wait=True)  
 
 
-def show_image(pil_image, title=''):
-    '''show PIL image [pil_image], giving a title if [title_str] is provided'''
+def img_show(img, title='', figsize=[14,8]):
+    '''show PIL image [img], giving a title if [title] is provided'''
     figure();
-    imshow(pil_image); xticks([]); yticks([]); 
+    plt.gcf().set_size_inches(figsize)
+    axis('off')
+    imshow(img); xticks([]); yticks([]); 
     if title:
-        matplotlib.pyplot.title(title); 
+        plt.title(title); 
 
 
 def show_images(path, K=3, figsize=(20,20)):
