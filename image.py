@@ -5,6 +5,15 @@ import os
 from common.files import listdir_visible
 from PIL import Image
 
+
+def img_open(file):
+    '''Open PIL image and force its mode to RGB'''
+    img = Image.open(file)
+    if img.mode!='RGB':
+        img = img.convert('RGB')
+    return img
+
+
 def dynamic_plot(X,Y, figsize=[10,5], max_x=None, min_y=None, max_y=None):
     '''plots dependency between X and Y dynamically: after each call current graph is redrawn
     DEMO:
