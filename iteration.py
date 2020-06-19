@@ -10,6 +10,23 @@ from itertools import tee, islice, chain
 
 
 
+def prev_curr(iterable):
+    '''
+    Returns sequentially prev and current element from iterator [iterable]
+    s -> (s0,s1), (s1,s2), (s2, s3), ...
+    Example:
+    L=[10,11,12,13,14]
+    for p,c in prev_curr(L):
+        print(p,c)
+
+    10 11
+    11 12
+    12 13
+    13 14  '''
+    a, b = itertools.tee(iterable)
+    next(b, None)
+    return zip(a, b)   
+
 
 def piter(x, percent_period=1,period=None,end="| ", show=True):
     '''Iterates through x (any iterable object, having len) returning iteratively elements from x and printing progress.

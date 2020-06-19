@@ -4,6 +4,7 @@ from pylab import *
 import os
 from common.files import listdir_visible
 from PIL import Image
+import io
 
 
 def img_open(file):
@@ -12,6 +13,9 @@ def img_open(file):
     if img.mode!='RGB':
         img = img.convert('RGB')
     return img
+
+
+
 
 
 def dynamic_plot(X,Y, figsize=[10,5], max_x=None, min_y=None, max_y=None):
@@ -63,3 +67,35 @@ def show_images(path, K=3, figsize=(20,20)):
         
         subplot(int(ceil(len(files)/K)),K,num)
         show_image(img, file);
+
+
+
+def image_to_byte_array(image):
+    imgByteArr = io.BytesIO()
+    image.save(imgByteArr, format='png')
+    imgByteArr = imgByteArr.getvalue()
+    return imgByteArr
+
+
+'''
+# DYNAMIC IMAGE UPDATE AND LOGGING DEMO IN JUPYTER:
+
+from IPython import display
+from PIL import Image
+import time
+
+img=Image.new("RGB", (256, 256),(255,0,0))
+
+dh = display.display(display.Image(image_to_byte_array(img)),display_id=True);
+
+print('1')
+time.sleep(1)
+img=Image.new("RGB", (256, 256),(0,255,0))
+dh.update(display.Image(image_to_byte_array(img)))
+print('2')
+
+time.sleep(1)
+img=Image.new("RGB", (256, 256),(0,0,255))
+dh.update(display.Image(image_to_byte_array(img)))
+print('3')
+'''
