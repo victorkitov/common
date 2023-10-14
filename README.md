@@ -1,2 +1,3 @@
 # common
-Common data analysis & machine learning routines
+
+Common data analysis and machine learning routines.
